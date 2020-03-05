@@ -1,25 +1,27 @@
 import logging
 
-from django.contrib.auth import logout
+from django.contrib.auth import logout, login, authenticate
 from django.contrib.auth.models import User
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework import status
+from rest_framework.utils import json
 
-from cp_authentication.auth.backends import ExternalDatabaseAuthenticationBackend
 from cp_authentication.utils import JSONResponse
 
 logger = logging.getLogger(__name__)
-external_auth = ExternalDatabaseAuthenticationBackend()
 
 @csrf_exempt
 def login_user(request):
     if request.method == 'POST':
         logger.debug('POST login view')
-        username = request.POST.get('username')
-        password = request.POST.get('password')
+        json_data = json.loads(request.body)
+
+        username = json_data['username']
+        password = json_data['password']
+
         try:
-            remote_user = external_auth.authenticate(request, username=username, password=password)
+            remote_user = authenticate(request, username=username, password=password)
         except Exception as e:
             logger.debug('Authenticate database error:%s' % e)
             return JSONResponse({'error': 'HTTP_400_BAD_REQUEST'}, status=status.HTTP_400_BAD_REQUEST)
@@ -35,6 +37,7 @@ def login_user(request):
                 user.set_password(password)
                 user.save()
 
+            login(request, remote_user)
             data = {'username': username}
             return JSONResponse(data, status=status.HTTP_200_OK)
 

@@ -11,15 +11,21 @@ def read(file_name):
 
 setup(
     name='cp-external-login-egg',
-    version='0.20.1',
+    version='1.20.0',
     description='Django external authenticate method.',
     long_description=read('README.md'),
     author='CalipsoPlus',
     author_email='mis@cells.es',
     keywords="CalipsoPlus external login egg",
     url='http://www.calipsoplus.eu/',
-    packages=['cp_authentication'],
-    install_requires=['django==2.1.5', 'mysqlclient==1.4', 'djangorestframework==3.7.7'],
+    packages=[
+        'cp_authentication',
+        'cp_authentication.auth',
+        'cp_authentication.migrations',
+        'cp_authentication.models',
+        'cp_authentication.templates',
+        'cp_authentication.views'],
+    install_requires=['django', 'mysqlclient', 'djangorestframework'],
     classifiers=[
         "Development Status :: 1 - Planning",
         'Programming Language :: Python :: 3.6',
