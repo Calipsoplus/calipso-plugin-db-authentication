@@ -97,6 +97,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 AUTHENTICATION_BACKENDS = (
+    'cp_authentication.auth.backends.ExternalDatabaseAuthenticationBackend',
     'django.contrib.auth.backends.ModelBackend',
 )
 
