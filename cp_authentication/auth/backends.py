@@ -1,6 +1,8 @@
 import hashlib
 import logging
 
+from django.contrib.auth.models import User
+
 from cp_authentication.models.auth_external_model import AuthDatabaseUser
 
 
@@ -37,4 +39,13 @@ class ExternalDatabaseAuthenticationBackend:
             self.logger.error(e)
             raise e
 
-
+    def get_user(self, user_id):
+        """
+        Retrieve the user's entry in the User model if it exists
+        :param user_id:
+        :return:
+        """
+        try:
+            return User.objects.get(pk=user_id)
+        except User.DoesNotExist:
+            return None
