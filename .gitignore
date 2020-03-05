@@ -1,0 +1,13 @@
+dist
+build
+*.egg-info
+**/*.swp
+*.project
+*/*.project
+**/*.project
+*.pydevproject
+*/*.pydevproject
+**/*.pydevproject
+*.pyc
+.idea/
+*.sqlite3
