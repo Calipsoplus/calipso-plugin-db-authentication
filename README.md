@@ -1,13 +1,20 @@
 # cp-external-login Egg
 
 ## Build
+- To generate this egg
 ```
 $ python setup.py sdist
 ```
 
+- Add the file in requirements.txt
+```
+...
+/path/to/eggs/cp-external-login-egg-1.20.3.tar.gz
+```
+
 - In the machine where your django app runs
-    - If installed --> `pip uninstall cp-external-login-egg`
-    - To install -> `pip install --user cp-external-login-egg-0.1.zip`
+    - If installed --> `pip uninstall cp-external-login-egg-1.20.4.tar.gz`
+    - To install -> `pip install --user cp-external-login-egg-1.20.4.tar.gz`
 
 ## Django external authenticate method.
 
@@ -20,14 +27,30 @@ INSTALLED_APPS = (
 )
 ```
 
-### URLS
-```
-url(r'^external_login/', include('cp_authentication.urls')),
+### URL PATH MODIFICATIONS
+Add "cp_authentication urls" to yours urls file:
+
+*this override login/logout url view methods by calipso*
+```on 
+if settings.EXTERNAL_LOGIN_ACTIVE:
+    urlpatterns.append(url('', include('cp_authentication.urls')))
+else:
+    urlpatterns.append(path('login/', login_user))
+    urlpatterns.append(path('logout/', logout_user))
 ```
 
+### AUTHENTICATION_BACKENDS
+Add "cp_authentication authentication backend" to yours settingS file:
 
-# Example configuration
-To be added in django settings file.
+```
+AUTHENTICATION_BACKENDS = (
+   'cp_authentication.auth.backends.ExternalDatabaseAuthenticationBackend',
+   ...
+  )
+```
+
+### SETTINGS configuration
+- To be added in django settings file.
 
 ```
 #  external db login configuration
