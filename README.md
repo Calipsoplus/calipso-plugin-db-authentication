@@ -9,7 +9,7 @@ $ python setup.py sdist
 - Add the file in requirements.txt
 ```
 ...
-/path/to/eggs/cp-external-login-egg-1.20.3.tar.gz
+/path/to/eggs/calipso-plugin-db-authentication-1.20.3.tar.gz
 ```
 
 - In the machine where your django app runs
