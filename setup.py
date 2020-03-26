@@ -10,7 +10,7 @@ def read(file_name):
 
 
 setup(
-    name='cp-external-login-egg',
+    name='calipso-plugin-db-authentication',
     version='1.20.4',
     description='Django external authenticate method.',
     long_description=read('README.md'),
