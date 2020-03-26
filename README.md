@@ -1,4 +1,4 @@
-# cp-external-login Egg
+# calipso-plugin-db-authentication Egg
 
 ## Build
 - To generate this egg
