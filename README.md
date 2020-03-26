@@ -13,8 +13,8 @@ $ python setup.py sdist
 ```
 
 - In the machine where your django app runs
-    - If installed --> `pip uninstall cp-external-login-egg-1.20.4.tar.gz`
-    - To install -> `pip install --user cp-external-login-egg-1.20.4.tar.gz`
+    - If installed --> `pip uninstall calipso-plugin-db-authentication-1.20.3.tar.gz`
+    - To install -> `pip install --user calipso-plugin-db-authentication-1.20.3.tar.gz`
 
 ## Django external authenticate method.
 
